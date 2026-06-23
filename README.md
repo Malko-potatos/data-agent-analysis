@@ -61,6 +61,17 @@ Native iOS/macOS 앱 구현 중심 use case는 이번 교육 범위에서 제외
 | [prompts/](prompts/) | 바로 실행 가능한 프롬프트 초안 |
 | [references/](references/) | 외부 참고 자료 정리 |
 | [skills/](skills/) | 반복 워크플로우를 Codex skill로 전환하기 위한 설계 메모 |
+| [scripts/](scripts/) | 문서 양식 등 재생성 가능한 산출물 빌더 |
+
+## Printable Form
+
+수업이나 워크숍에서는 [templates/data-analysis-agent-requirement-form.docx](templates/data-analysis-agent-requirement-form.docx)를 먼저 나눠주고, 학생들이 사용자 요구를 요구사항 카드, use case 라우팅, harness spec, 검증/승인 경계, 실행 프롬프트 초안으로 단계적으로 채우게 하면 좋습니다.
+
+DOCX 양식은 다음 명령으로 재생성할 수 있습니다.
+
+```bash
+python3 scripts/build_requirement_form_docx.py
+```
 
 ## Sources
 
