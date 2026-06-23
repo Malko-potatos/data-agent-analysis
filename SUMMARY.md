@@ -12,6 +12,7 @@
 - [07. Skills, Plugins, Tools](docs/07-skills-plugins-tools.md)
 - [08. Human In The Loop](docs/08-human-in-the-loop.md)
 - [09. Data Automation Playbook](docs/09-data-automation-playbook.md)
+- [10. Tutor Script: Verification, Hooks, Skills](docs/10-tutor-script-validation-hooks-skills.md)
 
 ## Examples
 
