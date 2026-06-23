@@ -4,11 +4,20 @@ Agent Workflow Harness는 에이전트가 어떤 일을 어떤 경계 안에서 
 
 프롬프트가 "무엇을 해줘"에 가깝다면, harness는 "어떤 순서로, 어떤 도구로, 어떤 승인과 검증을 거쳐, 어떤 실패 복구 규칙으로 해줘"에 가깝다.
 
+이 워크북에서 harness는 보통 두 lane을 결합한다.
+
+```text
+Data lane: 무엇을 분석/정제/요약/검증할 것인가?
+Automation lane: 그 결과를 어떻게 반복 실행, 알림, queue, follow-up으로 만들 것인가?
+```
+
 ## Harness Components
 
 | 구성요소 | 질문 |
 |---|---|
 | Goal | 최종적으로 무엇이 완성되어야 하는가? |
+| Data Lane | 어떤 데이터 분석 use case에 해당하는가? |
+| Automation Lane | 어떤 자동화 use case와 결합하는가? |
 | Inputs | 어떤 파일, DB, API, 앱, 화면, 문서를 사용할 수 있는가? |
 | Tools | 어떤 스킬, 플러그인, CLI, 브라우저, 커넥터가 필요한가? |
 | Procedure | 어떤 순서로 inventory, cleaning, analysis, reporting을 할 것인가? |
@@ -30,6 +39,16 @@ Agent Workflow Harness는 에이전트가 어떤 일을 어떤 경계 안에서 
 | Signal Intelligence | 커뮤니티, 이메일, Slack, 리뷰 등 비정형 신호를 수집/분류할 때 |
 | Monitoring Automation | 주기적으로 이상 징후를 찾고 알림 또는 queue를 만들 때 |
 | Agent Audit | 이미 만든 agent 구조와 검증 계층을 점검할 때 |
+
+## Combined Harness Examples
+
+| Combined Harness | Data Lane | Automation Lane |
+|---|---|---|
+| Recurring Report Automation | Dataset/report analysis | Run verified operations |
+| Dashboard Refresh Automation | Query tabular data | Verified dashboard refresh |
+| Signal-to-Action Automation | Feedback synthesis | Slack/inbox action queue |
+| Meeting-to-Analysis Queue | Meeting notes and data requests | Follow-up automation |
+| Goal-based Analysis Loop | Multi-step data analysis | Follow a goal |
 
 ## Output Contract
 

@@ -46,6 +46,20 @@
 | Long-running goal | Goal-based work loop |
 | Computer Use | App/browser action harness with approval boundary |
 
+## Data + Automation Composition
+
+이 워크북의 핵심 라우팅은 한 개 use case를 고르는 것이 아니라 Data lane과 Automation lane을 조합하는 것이다.
+
+| Data lane | Automation lane | Workbook pattern |
+|---|---|---|
+| Analyze datasets and ship reports | Run verified operations | Recurring Report Automation |
+| Query tabular data | Run verified operations | Dashboard Refresh Automation |
+| Clean and prepare messy data | Run verified operations | Repeatable Cleaning Workflow |
+| Turn feedback into actions | Prioritize Slack action items | Signal-to-Action Queue |
+| Dataset/report analysis | Follow a goal | Long-running Analysis Loop |
+| Report/dashboard verification | QA with Computer Use | UI-backed Verification |
+| Meeting or inbox requests with data needs | Manage inbox, Turn meetings into follow-ups | Request-to-Analysis Queue |
+
 ## Teaching Boundary
 
 공식 use case는 routing 참고 자료다. 이 워크북의 교육 단위는 공식 페이지 이름이 아니라 다음 세 가지다.

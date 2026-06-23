@@ -27,6 +27,16 @@
 | 산출물 | 프로그램별/선생님별 진행률 대시보드 |
 | 검증 | 어드민 export와 DB 집계 비교 |
 
+## Data + Automation Composition
+
+| Lane | 선택 |
+|---|---|
+| Data lane | Query tabular data, Dataset/report analysis |
+| Automation lane | Dashboard Refresh, Run verified operations |
+| 1회 분석 | 어드민 export와 DB 집계를 비교해 완료 기준을 확정 |
+| 자동화 전환 | dashboard refresh, 마지막 갱신 시각, 실패 로그, 지연 위험 queue |
+| 승인 경계 | DB write, 상태 변경, 담당자 메시지 발송은 승인 필요 |
+
 ## Rule Table Example
 
 | 영역 | 지표 |
@@ -59,6 +69,11 @@ DB 데이터를 기반으로 프로그램별 수업 진행률 자동 대시보�
 - 가구별 상태가 중복 없이 하나로만 분류되는지 확인하세요.
 - 선생님별 합계가 전체 집계와 맞는지 확인하세요.
 - 마지막 갱신 시각과 실패 상태를 dashboard에 표시하세요.
+
+자동화 전환:
+- 먼저 수동 export와 DB 집계가 맞는지 1회 검증하세요.
+- 검증 기준이 안정되면 자동 refresh 주기와 실패 로그를 설계하세요.
+- 지연 위험 알림은 자동 발송하지 말고 검토 queue 또는 draft로 남기세요.
 ```
 
 ## Expected Output
@@ -68,3 +83,4 @@ DB 데이터를 기반으로 프로그램별 수업 진행률 자동 대시보�
 - Rule table
 - Verification plan
 - Automation failure policy
+- 지연 위험 검토 queue 설계

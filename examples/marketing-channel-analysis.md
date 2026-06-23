@@ -27,6 +27,16 @@
 | 산출물 | 채널별 성과표, 평판 키워드, 개선안 |
 | 검증 | 비용 total, 전환 total, 원문 링크, 기간/필터 |
 
+## Data + Automation Composition
+
+| Lane | 선택 |
+|---|---|
+| Data lane | Multi-source marketing analysis, Feedback synthesis |
+| Automation lane | Recurring Report, Signal-to-Action, Slack action triage |
+| 1회 분석 | 채널별 성과표와 평판 키워드 검증 |
+| 자동화 전환 | 매주 리포트 생성, 반복 불만/기회 키워드 action queue 생성 |
+| 승인 경계 | 광고 캠페인 변경, 예산 조정, 외부 발송은 승인 필요 |
+
 ## Prompt Skeleton
 
 ```text
@@ -52,6 +62,11 @@ CTR, CVR, CPA, ROAS 등 계산 가능한 지표는 계산하되,
 - 광고비, 전환, 매출 total을 source total과 대조하세요.
 - join key와 unmatched row를 기록하세요.
 - 평판 요약에는 원문 링크 또는 ID를 남기세요.
+
+자동화 전환:
+- 이 분석을 매주 반복할 수 있도록 source, 기간, metric, 검증 기준을 고정하세요.
+- 반복 언급되는 평판 키워드는 담당자별 action queue draft로 만들되 자동 발송하지 마세요.
+- 캠페인 변경이나 예산 조정은 승인 요청으로만 남기세요.
 ```
 
 ## Expected Output
@@ -61,4 +76,5 @@ CTR, CVR, CPA, ROAS 등 계산 가능한 지표는 계산하되,
 - 유료/무료 채널 비교
 - 평판 키워드와 원문 링크
 - 다음 실험 후보
+- 주간 반복 리포트/알림 설계
 - 데이터 한계와 확인 질문

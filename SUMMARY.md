@@ -11,6 +11,7 @@
 - [06. Static Verification](docs/06-static-verification.md)
 - [07. Skills, Plugins, Tools](docs/07-skills-plugins-tools.md)
 - [08. Human In The Loop](docs/08-human-in-the-loop.md)
+- [09. Data Automation Playbook](docs/09-data-automation-playbook.md)
 
 ## Examples
 
@@ -24,6 +25,7 @@
 - [Simple Requirement Form DOCX](templates/data-analysis-agent-requirement-form.docx)
 - [Use Case Routing Table](templates/use-case-routing-table.md)
 - [Harness Spec](templates/harness-spec.md)
+- [Data Automation Routing Card](templates/data-automation-routing-card.md)
 - [Static Verification Checklist](templates/static-verification-checklist.md)
 - [Execution Prompt Template](templates/execution-prompt-template.md)
 
@@ -33,12 +35,14 @@
 - [Metric Definition](checklists/metric-definition.md)
 - [Dashboard Automation](checklists/dashboard-automation.md)
 - [External Action Approval](checklists/external-action-approval.md)
+- [Automation Loop](checklists/automation-loop.md)
 
 ## Prompts
 
 - [Marketing Data Analysis](prompts/marketing-data-analysis.md)
 - [Metric Discovery](prompts/metric-discovery.md)
 - [Dashboard Automation](prompts/dashboard-automation.md)
+- [Data Automation Playbook](prompts/data-automation-playbook.md)
 - [Agent Audit](prompts/agent-audit.md)
 
 ## References

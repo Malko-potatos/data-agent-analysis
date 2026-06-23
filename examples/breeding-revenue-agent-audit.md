@@ -27,6 +27,16 @@
 | 산출물 | agent 구조 진단표, 개선 구조, 키워드 리포트 |
 | 검증 | session/ip 기준 한계, UTM/key 매핑, 매출/환불 total |
 
+## Data + Automation Composition
+
+| Lane | 선택 |
+|---|---|
+| Data lane | Agent audit, Multi-source revenue analytics, Feedback synthesis |
+| Automation lane | Follow a goal, Run verified operations, Signal-to-Action |
+| 1회 분석 | 현재 agent의 입력/처리/출력/검증 gap 확인 |
+| 자동화 전환 | 반복 매출 리포트, 광고 데이터 연동 점검, 커뮤니티 키워드 queue |
+| 승인 경계 | 광고 설정 변경, 고객 메시지 발송, DB write는 승인 필요 |
+
 ## Audit Questions
 
 - 유입 출처가 광고, 블로그, 커뮤니티별로 구분되는가?
@@ -60,6 +70,11 @@ GA, DB, 결제/환불, 광고 데이터, 커뮤니티 신호가 어떻게 연결
 - join match rate와 unmatched row를 남기세요.
 - 공식 metric이 불명확하면 후보로만 표시하세요.
 - 외부 커뮤니티 요약에는 원문 링크 또는 ID를 남기세요.
+
+자동화 전환:
+- 개선 전에는 기존 agent의 검증 gap을 먼저 기록하세요.
+- 반복 가능한 매출/환불/유입 리포트는 verified operation 후보로 분리하세요.
+- 커뮤니티 키워드는 action queue draft로 만들고 자동 발송하지 마세요.
 ```
 
 ## Expected Output
@@ -69,3 +84,4 @@ GA, DB, 결제/환불, 광고 데이터, 커뮤니티 신호가 어떻게 연결
 - metric discovery table
 - 리스크와 검증 gap
 - 다음 구현 backlog
+- 반복 리포트와 신호 queue 자동화 후보
