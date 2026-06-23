@@ -47,8 +47,9 @@ Native iOS/macOS 앱 구현 중심 use case는 이번 교육 범위에서 제외
 2. [docs/01-natural-request-to-use-case.md](docs/01-natural-request-to-use-case.md)의 요구사항 해부 카드로 사용자 발화를 분해합니다.
 3. [docs/02-codex-use-case-map.md](docs/02-codex-use-case-map.md)에서 가까운 Codex use case를 고릅니다.
 4. [docs/03-agent-workflow-harness.md](docs/03-agent-workflow-harness.md)에서 작업 harness를 선택합니다.
-5. [templates/](templates/)의 양식으로 실행 명세와 검증 기준을 작성합니다.
-6. [examples/](examples/)의 예제로 수업 실습을 진행합니다.
+5. 비개발자 학습자는 [templates/data-analysis-agent-requirement-form.docx](templates/data-analysis-agent-requirement-form.docx)의 쉬운 요청 카드부터 작성합니다.
+6. 에이전트와 함께 use case, harness, 검증 기준, 승인 경계를 보완합니다.
+7. [examples/](examples/)의 예제로 수업 실습을 진행합니다.
 
 ## Repository Map
 
@@ -65,7 +66,7 @@ Native iOS/macOS 앱 구현 중심 use case는 이번 교육 범위에서 제외
 
 ## Printable Form
 
-수업이나 워크숍에서는 [templates/data-analysis-agent-requirement-form.docx](templates/data-analysis-agent-requirement-form.docx)를 먼저 나눠주고, 학생들이 사용자 요구를 요구사항 카드, use case 라우팅, harness spec, 검증/승인 경계, 실행 프롬프트 초안으로 단계적으로 채우게 하면 좋습니다.
+수업이나 워크숍에서는 [templates/data-analysis-agent-requirement-form.docx](templates/data-analysis-agent-requirement-form.docx)를 먼저 나눠주고, 학생들이 쉬운 질문만 채우게 합니다. use case 라우팅, harness 선택, 검증/승인 경계, 실행 프롬프트 초안은 에이전트와 대화하면서 뒤쪽 영역에 정리합니다.
 
 DOCX 양식은 다음 명령으로 재생성할 수 있습니다.
 

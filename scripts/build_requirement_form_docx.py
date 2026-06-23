@@ -141,15 +141,15 @@ def add_spacer(doc, pts=4):
 def add_title(doc):
     p = doc.add_paragraph()
     p.paragraph_format.space_after = Pt(3)
-    run = p.add_run("데이터 분석 에이전트 요구사항 카드")
+    run = p.add_run("데이터 분석 요청 카드")
     run.font.name = "Calibri"
-    run.font.size = Pt(22)
+    run.font.size = Pt(24)
     run.font.bold = True
     run.font.color.rgb = RGBColor.from_string(DARK_BLUE)
 
     p = doc.add_paragraph()
     p.style = "Subtitle"
-    p.add_run("자연어 요구를 use case, workflow harness, 검증 기준, 승인 경계로 정리하는 실습 양식")
+    p.add_run("비개발자가 먼저 채우고, 에이전트가 작업 방식과 검증 기준을 정리하는 쉬운 양식")
 
 
 def add_note_box(doc, title, body):
@@ -305,7 +305,7 @@ def configure_styles(doc):
     header.runs[0].font.color.rgb = RGBColor.from_string(MUTED)
 
     footer = section.footer.paragraphs[0]
-    footer.text = "Requirement Card · Harness Spec · Verification Boundary"
+    footer.text = "비개발자는 앞쪽의 쉬운 질문만 작성하고, 나머지는 에이전트와 함께 정리합니다."
     footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
     footer.runs[0].font.name = "Calibri"
     footer.runs[0].font.size = Pt(8.5)
@@ -318,208 +318,139 @@ def build():
     add_title(doc)
     add_note_box(
         doc,
-        "사용 방법",
-        "이 문서는 에이전트 실행 전 사용자의 자연어 요구를 정리하고, 실행 후 검증 기준으로 다시 확인하기 위한 양식입니다. "
-        "빈칸을 모두 채우는 것보다 확인된 사실, 추정, 확인 필요 사항을 분리하는 것이 더 중요합니다.",
+        "작성 방법",
+        "처음 작성자는 앞쪽의 쉬운 질문만 채우면 됩니다. use case, harness, 검증 방식 같은 어려운 분류는 "
+        "에이전트가 이 내용을 보고 뒤쪽에 정리합니다.",
     )
 
     add_label_detail_table(
         doc,
         [
-            ("프로젝트", "프로젝트명 또는 분석 주제"),
-            ("작성자", "작성자 이름"),
-            ("검토자", "데이터/도메인/승인 담당자"),
+            ("요청 이름", "예: 6월 마케팅 성과 분석, 수업 진행률 대시보드"),
+            ("작성자", "이름 또는 팀"),
             ("작성일", "YYYY-MM-DD"),
-            ("버전", "v0.1"),
+            ("함께 볼 사람", "예: 대표, 마케팅팀, 운영팀, 재무 담당자"),
         ],
-        header="0. 문서 정보",
+        header="기본 정보",
     )
 
     add_response_box(
         doc,
-        "1. 원 요구 기록",
-        "사용자 발화를 가능한 한 원문 그대로 붙여넣습니다. 요약하지 말고, 모호한 표현도 보존합니다.",
+        "1. 무엇을 알고 싶나요?",
+        "예: 어떤 광고가 효과적인지 알고 싶다. 프로그램별 수업 진행률을 보고 싶다.",
+        height_rows=3,
+    )
+
+    add_response_box(
+        doc,
+        "2. 이 결과로 어떤 결정을 하고 싶나요?",
+        "예: 광고 예산을 어디에 더 쓸지 정한다. 지연 위험이 큰 수업을 먼저 챙긴다.",
+        height_rows=3,
+    )
+
+    add_checklist_table(
+        doc,
+        "3. 데이터는 어디에 있나요? 아는 것만 체크하세요.",
+        [
+            "Excel, CSV, Google Sheet 같은 파일",
+            "회사 DB 또는 어드민 화면",
+            "GA, 광고 플랫폼, CRM 같은 외부 서비스",
+            "이메일, Slack, 설문, 리뷰, 커뮤니티 글",
+            "아직 잘 모르겠다",
+        ],
+    )
+
+    add_response_box(
+        doc,
+        "데이터 위치를 조금 더 적어주세요.",
+        "예: 파일명, 시트 이름, 어드민 메뉴, 대시보드 링크, 담당자 이름",
+        height_rows=2,
+    )
+
+    add_checklist_table(
+        doc,
+        "4. 어떤 결과물이 있으면 좋나요?",
+        [
+            "한 번 보는 분석 리포트",
+            "표나 차트",
+            "반복해서 보는 대시보드",
+            "매일/매주 자동 알림",
+            "개선안 또는 다음 액션 목록",
+        ],
+    )
+
+    add_spacer(doc, 10)
+    add_response_box(
+        doc,
+        "5. 지금은 어떻게 하고 있나요?",
+        "예: 어드민에서 내려받아 엑셀로 계산한다. 담당자가 매주 수동으로 정리한다.",
+        height_rows=3,
+    )
+
+    add_checklist_table(
+        doc,
+        "6. 꼭 조심해야 할 일이 있나요?",
+        [
+            "개인정보나 민감정보가 있다.",
+            "원본 파일이나 DB를 수정하면 안 된다.",
+            "숫자가 틀리면 중요한 의사결정에 영향을 준다.",
+            "외부로 메일, 메시지, 게시글을 보내면 안 된다.",
+            "실행 전에 사람이 승인해야 한다.",
+            "잘 모르겠다. 에이전트가 위험을 찾아줬으면 좋겠다.",
+        ],
+    )
+
+    add_response_box(
+        doc,
+        "7. 맞았는지 무엇과 비교하면 좋을까요?",
+        "예: 기존 어드민 숫자, 지난달 보고서, DB 총합, 담당자가 이미 알고 있는 기준 숫자",
+        height_rows=3,
+    )
+
+    add_response_box(
+        doc,
+        "추가로 남기고 싶은 말",
+        "불편한 점, 원하는 형식, 꼭 포함해야 할 항목, 걱정되는 점을 자유롭게 적습니다.",
+        height_rows=3,
+    )
+
+    add_spacer(doc, 10)
+    doc.add_heading("에이전트와 함께 정리하는 영역", level=1)
+    add_note_box(
+        doc,
+        "에이전트 사용 안내",
+        "아래 영역은 비개발자가 혼자 작성하지 않아도 됩니다. 위 내용을 에이전트에게 보여주고, "
+        "에이전트가 빠진 질문, 작업 유형, 검증 기준, 실행 프롬프트를 채우게 합니다.",
+    )
+
+    add_label_detail_table(
+        doc,
+        [
+            ("작업 유형", "분석 / 데이터 정리 / 대시보드 / 자동 알림 / 기존 agent 점검 중 무엇에 가까운가?"),
+            ("추가 질문", "시작 전에 사용자에게 물어볼 질문 3개 이하"),
+            ("필요한 자료", "파일, 링크, 계정, 권한, 기존 보고서 등"),
+            ("조심할 경계", "수정 금지, 발송 금지, 개인정보, 승인 필요 항목"),
+            ("맞춤 확인", "어떤 숫자나 자료와 비교해 결과를 확인할 것인가?"),
+        ],
+        header="에이전트 정리 카드",
+    )
+
+    add_response_box(
+        doc,
+        "에이전트에게 보낼 실행 요청 초안",
+        "위 요청 카드를 바탕으로 필요한 자료를 먼저 확인하고, 분석/자동화 방식을 제안한 뒤, "
+        "검증 기준과 승인 필요한 일을 분리해서 실행 계획을 작성해주세요.",
         height_rows=5,
     )
 
-    doc.add_heading("2. 요구사항 카드", level=1)
     add_label_detail_table(
         doc,
         [
-            ("사용자", "누가 결과를 보는가? 예: 경영진, 재무 담당, 마케팅 담당, 운영자"),
-            ("목적", "무엇을 알고 싶거나 개선하고 싶은가?"),
-            ("데이터", "데이터는 어디 있는가? DB, GA, 광고 플랫폼, 어드민, CSV, 커뮤니티 등"),
-            ("현재 방식", "지금은 어떻게 처리하는가? 수동 집계, export, 기존 agent, 대시보드 등"),
-            ("원하는 변화", "무엇이 달라지길 원하는가? 자동화, 대시보드, 리포트, 개선안 등"),
-            ("반복성", "일회성인가 반복 업무인가? 매일, 매주, 월간, 상시 모니터링 등"),
-            ("위험", "민감정보, 잘못된 집계, 외부 발송, DB 변경, 비용 발생 등"),
-            ("검증", "무엇과 대조하면 맞았다고 볼 수 있는가? 어드민 export, DB total, 기존 dashboard 등"),
+            ("사용자 확인", "이해한 내용이 맞음 / 일부 수정 필요 / 더 질문 필요"),
+            ("다음 단계", "자료 전달 / 에이전트 실행 / 대시보드 설계 / 자동화 보류"),
+            ("승인자", "필요할 때만 작성"),
         ],
-        widths=(1620, 7740),
-        header="요구사항 카드 작성란",
-    )
-
-    add_three_col_table(
-        doc,
-        ["구분", "내용", "메모"],
-        [
-            ("확인된 사실", "이미 사용자 또는 source로부터 확인한 내용", ""),
-            ("추정", "그럴 가능성이 있으나 아직 확인되지 않은 내용", ""),
-            ("확인 필요", "실행 전에 물어봐야 하는 질문", ""),
-        ],
-        widths=[1560, 4680, 3120],
-    )
-
-    add_page_break(doc)
-    doc.add_heading("3. Use Case 라우팅", level=1)
-    add_label_detail_table(
-        doc,
-        [
-            ("가까운 Codex use case", "예: Analyze datasets and ship reports, Query tabular data, Clean and prepare messy data"),
-            ("선택한 Harness", "예: Data Analysis, Data Cleaning, Metric Discovery, Dashboard Automation, Agent Audit"),
-            ("선택 이유", "요구사항 카드의 어떤 항목 때문에 이 harness가 맞는가?"),
-            ("제외한 Harness", "비슷하지만 이번에는 선택하지 않은 harness와 이유"),
-            ("필요 도구", "spreadsheet, DB connector, browser/chrome, Gmail/Slack, automation 등"),
-        ],
-        header="라우팅 결정",
-    )
-
-    add_checklist_table(
-        doc,
-        "라우팅 점검",
-        [
-            "결과물이 일회성 분석인지 반복 대시보드인지 구분했다.",
-            "데이터 정제가 먼저 필요한지 판단했다.",
-            "공식 metric이 있는지, metric discovery가 필요한지 판단했다.",
-            "외부 발송, 삭제, 배포, DB write 같은 승인 action을 확인했다.",
-            "모르는 내용은 추정하지 않고 확인 필요로 남겼다.",
-        ],
-    )
-
-    doc.add_heading("4. Harness Spec", level=1)
-    add_response_box(doc, "Goal", "최종적으로 무엇이 완성되어야 하는가?", height_rows=2)
-    add_three_col_table(
-        doc,
-        ["Input Source", "위치/권한", "기간/필터/Grain"],
-        [
-            ("", "", ""),
-            ("", "", ""),
-            ("", "", ""),
-        ],
-        widths=[2600, 3220, 3540],
-    )
-    add_three_col_table(
-        doc,
-        ["Tool / Skill / Plugin", "사용 목적", "권한 경계"],
-        [
-            ("", "", ""),
-            ("", "", ""),
-            ("", "", ""),
-        ],
-        widths=[2700, 3660, 3000],
-    )
-
-    add_page_break(doc)
-    doc.add_heading("5. 실행 절차와 제약", level=1)
-    add_three_col_table(
-        doc,
-        ["Step", "작업", "완료 기준"],
-        [
-            ("1", "데이터 inventory", ""),
-            ("2", "품질 점검 또는 정제", ""),
-            ("3", "metric 정의 또는 discovery", ""),
-            ("4", "분석/자동화/대시보드 설계", ""),
-            ("5", "검증과 산출물 정리", ""),
-        ],
-        widths=[820, 4440, 4100],
-    )
-    add_checklist_table(
-        doc,
-        "제약 조건",
-        [
-            "원본 데이터와 기존 코드를 임의로 수정하지 않는다.",
-            "기본 데이터 접근은 read-only로 둔다.",
-            "민감정보는 필요한 범위만 사용하고 외부 전송하지 않는다.",
-            "발송, 삭제, 배포, 권한 변경, DB write는 승인 전 실행하지 않는다.",
-            "실패하면 실패 단계, 입력 범위, 마지막 성공 상태를 남긴다.",
-        ],
-    )
-
-    doc.add_heading("6. 정적 검증 기준", level=1)
-    add_checklist_table(
-        doc,
-        "검증 체크리스트",
-        [
-            "사용한 파일, DB, API, 화면, 문서를 기록했다.",
-            "분석 기간과 필터를 기록했다.",
-            "row count와 total/subtotal을 source와 대조했다.",
-            "계산식의 분자, 분모, 제외 조건을 명시했다.",
-            "join key, match rate, unmatched row를 기록했다.",
-            "샘플 row를 수동 검산하거나 계산식을 설명했다.",
-            "확인한 사실, 추정, 사람 확인 필요 사항을 분리했다.",
-            "사람이 리뷰 가능한 산출물로 남겼다.",
-        ],
-    )
-
-    add_page_break(doc)
-    doc.add_heading("7. 승인 경계", level=1)
-    add_checklist_table(
-        doc,
-        "승인 없이 실행하지 않을 Action",
-        [
-            "이메일, Slack, DM, 댓글, 게시글 발송",
-            "파일 삭제 또는 원본 덮어쓰기",
-            "DB write, schema 변경, 권한 변경",
-            "외부 배포 또는 비용 발생 action",
-            "민감정보가 포함된 데이터 외부 반출",
-        ],
-    )
-    add_label_detail_table(
-        doc,
-        [
-            ("Action", "실행하려는 일"),
-            ("Target", "수신자, 시스템, 파일, DB, 서비스"),
-            ("Payload", "발송문, 변경 내용, query, 배포 대상 등"),
-            ("Risk", "실패/오류/민감정보/비용 위험"),
-            ("Rollback", "되돌리기 또는 중지 계획"),
-            ("Approval", "승인자와 승인 시각"),
-        ],
-        header="승인 요청 양식",
-    )
-
-    doc.add_heading("8. 실행 프롬프트 초안", level=1)
-    for title, guide in [
-        ("목표", "무엇을 알고 싶거나 완성하고 싶은가?"),
-        ("입력", "파일, URL, 앱, API, DB, Slack/Gmail/GitHub 등 출처는 무엇인가?"),
-        ("역할", "분석가, 데이터 감사자, 구현자, QA 담당 등"),
-        ("절차", "먼저 inventory를 하고, 그 다음 정제/분석/작성/검증으로 진행한다."),
-        ("제약", "원본 보존, 외부 전송 금지, read-only, 승인 필요 action 등"),
-        ("검증", "row count, total, sample check, screenshot, source link 등"),
-        ("출력", "표, 리포트, dashboard spec, action queue, 확인 질문 등"),
-    ]:
-        add_response_box(doc, title, guide, height_rows=2)
-
-    add_page_break(doc)
-    doc.add_heading("9. 검토 결정", level=1)
-    add_checklist_table(
-        doc,
-        "실행 전 최종 확인",
-        [
-            "요구사항 카드가 사용자 의도와 맞는다.",
-            "선택한 harness와 제외한 harness의 이유가 설명되어 있다.",
-            "필요 데이터와 접근 권한이 확인되었다.",
-            "검증 기준이 최소 L2 이상이다.",
-            "승인 필요한 action이 분리되어 있다.",
-        ],
-    )
-    add_label_detail_table(
-        doc,
-        [
-            ("결정", "실행 / 보류 / 추가 질문 / 다른 harness로 변경"),
-            ("이유", "결정 근거"),
-            ("다음 작업", "에이전트 실행, 데이터 요청, 검토 회의, 자동화 설계 등"),
-        ],
-        header="리뷰 결과",
+        header="실행 전 확인",
     )
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
